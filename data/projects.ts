@@ -35,7 +35,7 @@ export const projects: Project[] = [
     slug: "automation-systems",
     name: "Automation Systems",
     image: "/images/automation-systems.jpg",
-    imageAspect: "1600/810",
+    imageAspect: "1600/1066",
     category: "n8n · CRM · APIs · Workflow Automation",
     description:
       "Automation work focused on improving internal workflows and connecting business systems.",
