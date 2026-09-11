@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f7f5ef;
+  color: #12181f;
+}
+
+::selection {
+  background: #33625f;
+  color: #f5f3ee;
+}
+
+/* Hairline rule utility */
+.rule {
+  border-color: rgba(18, 24, 31, 0.12);
+}
+.rule-dark {
+  border-color: rgba(245, 243, 238, 0.14);
+}
+
+/* Reveal-on-scroll: default hidden state, .is-visible triggers the animation */
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.reveal.is-visible {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Slightly richer entrance for card-shaped reveals (fade + soft scale) */
+@keyframes fade-up-scale {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.reveal-card {
+  transform: translateY(22px) scale(0.96);
+}
+.reveal-card.is-visible {
+  animation: fade-up-scale 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Custom scrollbar - subtle, not a stereotypical neon scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(18, 24, 31, 0.18);
+  border-radius: 0;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
