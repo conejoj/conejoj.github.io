@@ -62,13 +62,13 @@ export default function Leadership() {
         <SectionHeader
           eyebrow="Leadership & Global Experience"
           title="Leadership beyond technology."
-          subtitle="My experience extends beyond software development. Through student government, multicultural leadership, mentoring, and international programs, I've had the opportunity to lead teams, organize events, represent diverse communities, and work with people from different backgrounds."
+          subtitle="Beyond software, I've led student government and a multicultural organization, mentored students, and joined a global leadership program."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-7">
           {leadershipEntries.map((entry, i) => (
             <Reveal key={entry.title} className="reveal-card" delay={i * 110}>
-              <div className="group relative flex h-full flex-col border border-ink/12 bg-cream p-7 shadow-[0_1px_2px_rgba(23,23,23,0.04)] transition-all duration-500 ease-out hover:-translate-y-[5px] hover:border-accent/40 hover:shadow-[0_28px_48px_-28px_rgba(23,23,23,0.3)] md:p-8">
+              <div className="group relative flex h-full flex-col border border-ink/12 bg-cream p-6 shadow-[0_1px_2px_rgba(23,23,23,0.04)] transition-all duration-500 ease-out hover:-translate-y-[5px] hover:border-accent/40 hover:shadow-[0_28px_48px_-28px_rgba(23,23,23,0.3)] lg:p-8">
                 <div className="flex items-start justify-between">
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-accent/25 bg-accent/[0.08] text-accent-deep transition-all duration-500 ease-out group-hover:-rotate-3 group-hover:scale-110 group-hover:bg-accent/[0.16]">
                     <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
@@ -80,7 +80,7 @@ export default function Leadership() {
                   </span>
                 </div>
 
-                <div className="mt-6 min-w-0 flex-1">
+                <div className="mt-6 min-w-0 flex-1 text-center md:text-left">
                   {entry.meta && (
                     <p className="font-mono text-[11px] uppercase tracking-wideish text-ink/40">
                       {entry.meta}
@@ -97,7 +97,7 @@ export default function Leadership() {
                   <p className="mt-3 text-[14px] leading-relaxed text-ink/65">
                     {entry.description}
                   </p>
-                  <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4">
+                  <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4 text-left">
                     {entry.highlights.map((h) => (
                       <li
                         key={h}

@@ -5,15 +5,16 @@ import "@fontsource-variable/instrument-sans/wght.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "./globals.css";
+import SmoothScroll from "@/lib/SmoothScroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://joseconejo.dev"),
-  title: "Jose Conejo | Software Developer, AI & Automation",
+  title: "Jose Conejo | Software Engineer",
   description:
-    "Jose Conejo is a Computer Science & AI graduate from Costa Rica building software, automation, and AI-driven tools for real business problems.",
+    "Portfolio of Jose Conejo, a software engineer from Costa Rica and Computer Science & AI graduate of John Brown University, working on web applications, automation workflows, and machine-learning projects.",
   keywords: [
     "Jose Conejo",
-    "Software Developer",
+    "Software Engineer",
     "AI Developer",
     "Automation Engineer",
     "Full Stack Developer",
@@ -22,9 +23,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Jose Conejo" }],
   openGraph: {
-    title: "Jose Conejo | Software Developer, AI & Automation",
+    title: "Jose Conejo | Software Engineer",
     description:
-      "Software engineering, AI, and automation. Built with purpose.",
+      "Software engineer from Costa Rica working on web applications, automation workflows, and machine-learning projects.",
     type: "website",
   },
 };
@@ -36,7 +37,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }

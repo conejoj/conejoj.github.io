@@ -16,16 +16,20 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    const lenis = (window as any).__lenis;
+    if (open) lenis?.stop();
+    else lenis?.start();
     return () => {
       document.body.style.overflow = "";
+      (window as any).__lenis?.start();
     };
   }, [open]);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transform-gpu transition-[background-color,border-color] duration-300 ${
         scrolled
-          ? "bg-cream/90 backdrop-blur-md border-b border-ink/10"
+          ? "bg-cream/95 border-b border-ink/10"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -60,7 +64,7 @@ export default function Navbar() {
             href="#contact"
             className="group inline-flex items-center gap-2 border border-ink/20 px-5 py-2.5 text-[13px] font-medium text-ink transition-all duration-300 hover:border-accent hover:text-accent"
           >
-            Let&rsquo;s Connect
+            Get in Touch
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">
               →
             </span>
@@ -105,7 +109,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-6 inline-flex items-center gap-2 border border-ink/20 px-5 py-3 text-sm font-medium text-ink"
           >
-            Let&rsquo;s Connect →
+            Get in Touch →
           </a>
           <div className="mt-6 flex gap-5 font-mono text-xs uppercase tracking-wideish text-ink/50">
             <a href={site.linkedin} target="_blank" rel="noreferrer">

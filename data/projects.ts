@@ -9,6 +9,7 @@ export interface Project {
   href?: string;
   image?: string;
   imageAspect?: string;
+  imageAlt?: string;
   accent: "cream" | "stone";
 }
 
@@ -17,14 +18,15 @@ export const projects: Project[] = [
     index: "01",
     slug: "walton-service-hours",
     name: "Walton Service Hours Platform",
-    image: "/images/walton-service-hours.jpg",
-    imageAspect: "1600/907",
+    image: "/images/walton-dashboard.jpg",
+    imageAspect: "1600/906",
+    imageAlt: "Walton Service Hours Platform student dashboard showing 16 community service hours and approved reports",
     category: "Full-Stack Development · Authentication · Azure",
     description:
-      "A role-based service-hour management platform built for students and administrators at John Brown University.",
+      "A role-based service-hour management platform developed for students and administrators at John Brown University as part of a team.",
     highlights: [
-      "Built submission, review, and approval workflows with different student and administrator permissions.",
-      "Integrated Microsoft authentication using Azure AD/MSAL and claims-based access control.",
+      "Worked on submission, review, and approval workflows with different student and administrator permissions.",
+      "Contributed to the Microsoft authentication integration using Azure AD/MSAL and claims-based access control.",
       "Created structured student history views for tracking more than 300 recorded service hours.",
     ],
     year: "2022",
@@ -34,14 +36,15 @@ export const projects: Project[] = [
     index: "02",
     slug: "automation-systems",
     name: "Automation Systems",
-    image: "/images/automation-systems.jpg",
-    imageAspect: "1600/1066",
+    image: "/images/automation-workflow.jpg",
+    imageAspect: "1600/601",
+    imageAlt: "n8n workflow that triages incoming Gmail with AI, logs status changes, and creates Google Calendar alerts",
     category: "n8n · CRM · APIs · Workflow Automation",
     description:
       "Automation work focused on improving internal workflows and connecting business systems.",
     highlights: [
       "Worked on n8n automation workflows connecting CRM platforms, APIs, cloud services, and internal tools.",
-      "Worked on CRM integrations and automated data-processing workflows.",
+      "Contributed to CRM integrations and automated data-processing workflows.",
       "Used AI-assisted development tools to support automation and workflow development.",
     ],
     year: "2025",
@@ -53,6 +56,7 @@ export const projects: Project[] = [
     name: "Panama Cancer Clinic Website",
     image: "/images/panama-cancer-clinic.jpg",
     imageAspect: "1600/862",
+    imageAlt: "Panama Cancer Clinic website homepage",
     category: "Web Development · Performance · Website Rebuild",
     description:
       "A website rebuild focused on creating a cleaner user experience and improving overall site performance.",
@@ -68,15 +72,16 @@ export const projects: Project[] = [
     index: "04",
     slug: "prime-software-dashboard",
     name: "Prime Software Solutions Dashboard",
-    image: "/images/prime-software-dashboard.jpg",
-    imageAspect: "1600/774",
+    image: "/images/prime-software-dashboard-v2.jpg",
+    imageAspect: "1600/772",
+    imageAlt: "Prime Software Solutions internal dashboard",
     category: "PHP · MySQL · Product Development",
     description:
       "A customizable internal dashboard designed to centralize company information and tools.",
     highlights: [
       "Developed drag-and-drop widgets with layouts saved independently for each user.",
       "Built an announcements system with editing, pinning, likes, and administrative controls.",
-      "Tested application performance and improved usability across dashboard components.",
+      "Participated in application testing and usability improvements across dashboard components.",
     ],
     year: "2025",
     accent: "stone",
@@ -87,6 +92,7 @@ export const projects: Project[] = [
     name: "AI Mental Health Journal",
     image: "/images/ai-mental-health-journal.jpg",
     imageAspect: "1600/906",
+    imageAlt: "AI Mental Health Journal stress-trend dashboard",
     category: "Django · Machine Learning · Python",
     description:
       "A Django application combining private journaling with machine-learning-based stress analysis.",

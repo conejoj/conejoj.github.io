@@ -7,6 +7,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Allows border-ink/12, border-paper/12, etc. (used for subtle dividers)
+      opacity: {
+        12: "0.12",
+      },
       colors: {
         navy: {
           950: "#0B0F14",

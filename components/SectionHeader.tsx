@@ -19,7 +19,9 @@ export default function SectionHeader({
   return (
     <div
       className={`flex flex-col ${
-        align === "center" ? "items-center text-center" : "items-start text-left"
+        align === "center"
+          ? "items-center text-center"
+          : "items-center text-center md:items-start md:text-left"
       }`}
     >
       <Reveal>
@@ -48,7 +50,7 @@ export default function SectionHeader({
       {subtitle && (
         <Reveal delay={140}>
           <p
-            className={`mt-5 max-w-xl text-balance text-[15px] leading-relaxed ${
+            className={`mx-auto mt-5 max-w-xl text-balance md:mx-0 text-[15px] leading-relaxed ${
               isDark ? "text-paper/65" : "text-ink/60"
             }`}
           >

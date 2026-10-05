@@ -7,26 +7,26 @@ export interface Capability {
 export const capabilities: Capability[] = [
   {
     index: "01",
-    title: "Software Development",
+    title: "Software Engineering",
     description:
-      "Building applications, APIs, dashboards, and internal tools around real business requirements, from data model to interface.",
+      "Building applications, APIs, dashboards, and internal tools around how a business actually works, from the data model to the interface.",
   },
   {
     index: "02",
     title: "AI & Automation",
     description:
-      "Using artificial intelligence, APIs, integrations, and workflow automation to reduce repetitive work and create smarter, more visible systems.",
+      "Using AI, APIs, and workflow automation to cut repetitive work and make processes easier to track.",
   },
   {
     index: "03",
     title: "Web Development",
     description:
-      "Creating responsive digital experiences focused on usability, performance, accessibility, and long-term maintainability.",
+      "Building fast, responsive, accessible websites that are easy to use and easy to maintain.",
   },
   {
     index: "04",
     title: "DevOps & Cloud",
     description:
-      "Working with CI/CD pipelines, source control, cloud services, deployments, infrastructure, and development environments.",
+      "Setting up source control, CI/CD pipelines, and cloud deployments so code gets from development to production reliably.",
   },
 ];

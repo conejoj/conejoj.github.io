@@ -14,15 +14,22 @@ interface ProjectShowcaseProps {
  */
 export default function ProjectShowcase({ project, position }: ProjectShowcaseProps) {
   const reversed = position % 2 === 1;
+  // The first project sits closer to the "Selected Work" intro and aligns
+  // its image to the top of its text, so the two read as one unit.
+  const isFirst = position === 0;
   const bg = project.accent === "stone" ? "bg-stone-100" : "bg-cream";
   const Mockup = PROJECT_MOCKUPS[position] ?? PROJECT_MOCKUPS[0];
 
   return (
     <article className={`${bg} border-b border-ink/10`}>
-      <div className="mx-auto max-w-content px-6 py-16 md:px-10 md:py-20">
+      <div
+        className={`mx-auto max-w-content px-6 md:px-10 ${
+          isFirst ? "pb-16 pt-8 md:pb-20 md:pt-6" : "py-16 md:py-20"
+        }`}
+      >
         <div
           className={`grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-10 ${
-            reversed ? "" : ""
+            isFirst ? "md:items-start" : ""
           }`}
         >
           {/* Visual area */}
@@ -38,12 +45,12 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
 
           {/* Content */}
           <div
-            className={`md:col-span-5 ${
+            className={`text-center md:col-span-5 md:text-left ${
               reversed ? "md:order-1" : "md:order-2"
             }`}
           >
             <Reveal delay={80}>
-              <div className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-wideish text-ink/45">
+              <div className="flex items-center justify-center gap-3 font-mono text-[12px] uppercase tracking-wideish text-ink/45 md:justify-start">
                 <span>{project.index}</span>
                 <span className="h-px w-6 bg-ink/25" />
                 <span>{project.year}</span>
@@ -63,13 +70,13 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
             </Reveal>
 
             <Reveal delay={220}>
-              <p className="mt-6 text-[14.5px] leading-relaxed text-ink/70">
+              <p className="mx-auto mt-6 max-w-xl text-[14.5px] leading-relaxed text-ink/70 md:mx-0">
                 {project.description}
               </p>
             </Reveal>
 
             <Reveal delay={260}>
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mx-auto mt-5 max-w-xl space-y-2.5 text-left md:mx-0">
                 {project.highlights.map((h) => (
                   <li
                     key={h}
@@ -82,8 +89,8 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
               </ul>
             </Reveal>
 
-            <Reveal delay={300}>
-              {project.href ? (
+            {project.href && (
+              <Reveal delay={300}>
                 <a
                   href={project.href}
                   target="_blank"
@@ -95,12 +102,8 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
                     →
                   </span>
                 </a>
-              ) : (
-                <span className="mt-8 inline-flex items-center gap-2 border-b border-ink/15 pb-1 text-[14px] font-medium text-ink/35">
-                  Case Study Available on Request
-                </span>
-              )}
-            </Reveal>
+              </Reveal>
+            )}
           </div>
         </div>
       </div>
@@ -117,15 +120,15 @@ function ProjectVisual({
 }) {
   return (
     <div
-      className={`group relative w-full overflow-hidden rounded-sm border border-ink/12 bg-navy-900 shadow-[0_20px_50px_-24px_rgba(12,18,25,0.45)] transition-transform duration-500 ease-out hover:scale-[0.97] ${
-        project.image ? "" : "aspect-[4/3] md:aspect-[16/11]"
+      className={`group relative w-full overflow-hidden rounded-sm shadow-[0_20px_50px_-24px_rgba(12,18,25,0.45)] transition-transform duration-500 ease-out hover:scale-[0.97] ${
+        project.image ? "" : "aspect-[4/3] bg-navy-900 md:aspect-[16/11]"
       }`}
       style={project.image ? { aspectRatio: project.imageAspect } : undefined}
     >
       {project.image ? (
         <Image
           src={project.image}
-          alt={`${project.name} website`}
+          alt={project.imageAlt ?? project.name}
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
           className="object-cover"
@@ -142,14 +145,12 @@ function ProjectVisual({
         </>
       )}
 
-      <div
-        className="absolute -right-10 -top-10 h-56 w-56 rounded-full border border-paper/10"
-        aria-hidden
-      />
-      <div
-        className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-accent-bright/70 via-paper/10 to-transparent"
-        aria-hidden
-      />
+      {!project.image && (
+        <div
+          className="absolute -right-10 -top-10 h-56 w-56 rounded-full border border-paper/10"
+          aria-hidden
+        />
+      )}
     </div>
   );
 }

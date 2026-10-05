@@ -8,7 +8,7 @@ interface ExperienceItemProps {
 export default function ExperienceItem({ entry, index }: ExperienceItemProps) {
   return (
     <details className="group border-b border-ink/12 py-7 md:py-8" open={index === 0}>
-      <summary className="grid cursor-pointer list-none grid-cols-1 gap-3 md:grid-cols-12 md:items-center md:gap-6">
+      <summary className="grid cursor-pointer list-none grid-cols-1 justify-items-center gap-3 text-center md:grid-cols-12 md:items-center md:justify-items-stretch md:gap-6 md:text-left">
         <span className="font-mono text-[13px] text-ink/35 md:col-span-1">
           {String(index + 1).padStart(2, "0")}
         </span>
@@ -24,7 +24,7 @@ export default function ExperienceItem({ entry, index }: ExperienceItemProps) {
           {entry.dates}
         </span>
 
-        <span className="flex flex-wrap gap-2 md:col-span-3">
+        <span className="flex flex-wrap justify-center gap-2 md:col-span-3 md:justify-start">
           {entry.focus.map((f) => (
             <span
               key={f}
@@ -35,20 +35,20 @@ export default function ExperienceItem({ entry, index }: ExperienceItemProps) {
           ))}
         </span>
 
-        <span className="hidden justify-end md:col-span-1 md:flex">
+        <span className="mt-1 flex justify-center md:col-span-1 md:mt-0 md:justify-end">
           <span className="flex h-7 w-7 items-center justify-center border border-ink/15 text-ink/50 transition-transform duration-300 group-open:rotate-45">
             +
           </span>
         </span>
       </summary>
 
-      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
+      <div className="mt-6 grid grid-cols-1 gap-5 text-center md:mt-5 md:grid-cols-12 md:gap-6 md:text-left">
         <div className="hidden md:col-span-1 md:block" />
         <div className="md:col-span-7">
-          <p className="text-[14.5px] leading-relaxed text-ink/65">
+          <p className="mx-auto max-w-xl text-[14.5px] leading-relaxed text-ink/65 md:mx-0 md:max-w-none">
             {entry.description}
           </p>
-          <ul className="mt-4 space-y-2">
+          <ul className="mx-auto mt-4 max-w-xl space-y-2 text-left md:mx-0 md:max-w-none">
             {entry.highlights.map((h) => (
               <li
                 key={h}
@@ -60,7 +60,7 @@ export default function ExperienceItem({ entry, index }: ExperienceItemProps) {
             ))}
           </ul>
         </div>
-        <div className="flex flex-wrap content-start gap-2 md:col-span-4">
+        <div className="flex flex-wrap content-start justify-center gap-2 md:col-span-4 md:justify-start">
           {entry.tech.map((t) => (
             <span
               key={t}

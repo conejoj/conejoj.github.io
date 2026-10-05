@@ -12,20 +12,20 @@ export const experience: ExperienceEntry[] = [
   {
     company: "NOVA Solutions",
     role: "Automation & AI Intern",
-    dates: "2025 - Mar 2026",
+    dates: "2025–Mar 2026",
     description:
-      "Worked across automation, AI-assisted development, CRM integrations, and web development.",
+      "Contributed to automation, CRM integrations, AI-assisted development, and web development initiatives.",
     highlights: [
       "Worked on CRM integrations and automated data-processing workflows.",
       "Supported the rebuild of a company website and worked on improving page-load performance.",
     ],
-    tech: ["n8n", "CRM Integrations", "APIs", "Web Performance"],
-    focus: ["Automation Engineering", "AI-Assisted Development"],
+    tech: ["n8n", "APIs", "Web Performance", "AI-Assisted Development"],
+    focus: ["Automation Engineering", "CRM Integrations"],
   },
   {
     company: "Prime Software Solutions",
     role: "Software Developer, Capstone",
-    dates: "2025 - 2026",
+    dates: "2025–2026",
     description:
       "Worked with a development team to design and deliver a modular internal business dashboard.",
     highlights: [
@@ -38,15 +38,15 @@ export const experience: ExperienceEntry[] = [
   },
   {
     company: "Freelance",
-    role: "Web Developer",
-    dates: "2022 - Present",
+    role: "Websites, Automation & Digital Marketing",
+    dates: "2022–Present",
     description:
-      "Delivered websites for small businesses and healthcare clients, with a focus on performance, clarity, and trust-building design.",
+      "Building websites for small businesses, automating parts of how they deliver their services, and supporting their digital marketing.",
     highlights: [
-      "Rebuilt and maintained client websites, including the Panama Cancer Clinic site, improving structure and load performance.",
-      "Worked directly with clients to translate their goals into clear, accessible page layouts.",
+      "Designed, built, and maintained client websites with a focus on performance and clear page structure.",
+      "Set up service automations and supported digital marketing so clients could spend less time on repetitive tasks and reach more customers.",
     ],
-    tech: ["HTML", "CSS", "JavaScript", "Accessibility (WCAG)"],
-    focus: ["Web Development"],
+    tech: ["HTML", "CSS", "JavaScript", "Automation"],
+    focus: ["Website Building", "Digital Marketing"],
   },
 ];

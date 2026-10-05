@@ -19,7 +19,7 @@ export const navLinks = [
 ];
 
 export const expertiseLabels = [
-  "Software Development",
+  "Software Engineering",
   "AI",
   "Automation",
   "DevOps",

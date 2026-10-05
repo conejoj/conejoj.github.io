@@ -18,7 +18,7 @@ export const skillGroups: SkillGroup[] = [
   {
     index: "03",
     title: "AI & Automation",
-    items: ["n8n", "OpenAI APIs", "Anthropic APIs", "scikit-learn", "AI Integrations"],
+    items: ["n8n", "OpenAI APIs", "Anthropic APIs", "Machine Learning", "AI Integrations"],
   },
   {
     index: "04",
