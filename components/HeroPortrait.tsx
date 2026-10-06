@@ -19,7 +19,7 @@ export default function HeroPortrait() {
       <div className="hero-portrait-mask relative aspect-[1000/1140] w-full overflow-hidden bg-stone-200">
         <div className="hero-portrait-settle absolute inset-0">
           <Image
-            src="/images/portrait-hero.jpg"
+            src="/images/portrait-hero.webp"
             alt="Jose Conejo"
             fill
             priority

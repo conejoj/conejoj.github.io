@@ -1,25 +1,29 @@
+"use client";
+
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/lib/Reveal";
 import { skillGroups } from "@/data/skills";
+import { useT } from "@/lib/i18n";
 
 /**
  * Dark, multi-column index of tools. Each category is a column with its
  * number in teal, a hairline under the title, and a plain-text list.
  */
 export default function Skills() {
+  const t = useT();
   return (
     <section className="border-b border-paper/10 bg-navy-900">
       <div className="mx-auto max-w-content px-6 py-24 md:px-10 md:py-32">
         <SectionHeader
-          eyebrow="Skills & Technology"
-          title="What I work with."
+          eyebrow={{ en: "Skills & Technology", es: "Habilidades y Tecnología" }}
+          title={{ en: "What I work with.", es: "Con lo que trabajo." }}
           tone="dark"
         />
 
         <div className="mt-16 grid grid-cols-1 gap-x-10 border-t border-paper/10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-x-8">
           {skillGroups.map((group, i) => (
             <Reveal
-              key={group.title}
+              key={group.index}
               delay={i * 70}
               className={`pt-8 text-center md:text-left ${
                 // In the two-column layout, an odd last category sits centered
@@ -33,7 +37,7 @@ export default function Skills() {
                 {group.index}
               </span>
               <h3 className="mt-3 border-b border-paper/10 pb-5 text-[15px] font-medium leading-snug tracking-tight text-paper lg:min-h-[4.25rem]">
-                {group.title}
+                {t(group.title)}
               </h3>
               {/* Longer lists (Languages) flow into a second column so every
                   category is five rows tall. */}
@@ -46,10 +50,10 @@ export default function Skills() {
               >
                 {group.items.map((item) => (
                   <li
-                    key={item}
+                    key={typeof item === "string" ? item : item.en}
                     className="text-[14.5px] leading-snug text-paper/60 transition-colors duration-200 hover:text-accent-bright"
                   >
-                    {item}
+                    {t(item)}
                   </li>
                 ))}
               </ul>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/lib/Reveal";
 import { capabilities } from "@/data/capabilities";
+import { useT } from "@/lib/i18n";
 
 /**
  * Pinned storytelling on desktop: the heading stays put on the left while
@@ -12,6 +13,7 @@ import { capabilities } from "@/data/capabilities";
  * On small screens it falls back to a normal stacked list.
  */
 export default function CapabilitySection() {
+  const t = useT();
   const listRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
 
@@ -60,8 +62,11 @@ export default function CapabilitySection() {
           <div className="md:col-span-5">
             <div className="md:sticky md:top-32">
               <SectionHeader
-                eyebrow="What I Do"
-                title="Four ways I turn problems into working systems."
+                eyebrow={{ en: "What I Do", es: "Lo Que Hago" }}
+                title={{
+                  en: "Four ways I turn problems into working systems.",
+                  es: "Cuatro formas en que convierto problemas en sistemas que funcionan.",
+                }}
                 tone="dark"
               />
               <div className="mt-12 hidden items-center gap-4 font-mono text-[12px] text-paper/45 md:flex">
@@ -100,10 +105,10 @@ export default function CapabilitySection() {
                     </div>
                     <div className="md:col-span-6">
                       <h3 className="text-[clamp(1.4rem,2.4vw,1.85rem)] font-medium tracking-tightest text-paper">
-                        {cap.title}
+                        {t(cap.title)}
                       </h3>
                       <p className="mx-auto mt-4 max-w-md text-[14.5px] leading-relaxed text-paper/60 md:mx-0">
-                        {cap.description}
+                        {t(cap.description)}
                       </p>
                     </div>
                   </div>

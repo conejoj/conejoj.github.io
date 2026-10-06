@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Reveal from "@/lib/Reveal";
 import { PROJECT_MOCKUPS } from "@/components/ProjectMockups";
 import type { Project } from "@/data/projects";
+import { useT } from "@/lib/i18n";
 
 interface ProjectShowcaseProps {
   project: Project;
@@ -19,6 +22,7 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
   const isFirst = position === 0;
   const bg = project.accent === "stone" ? "bg-stone-100" : "bg-cream";
   const Mockup = PROJECT_MOCKUPS[position] ?? PROJECT_MOCKUPS[0];
+  const t = useT();
 
   return (
     <article className={`${bg} border-b border-ink/10`}>
@@ -59,19 +63,19 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
 
             <Reveal delay={140}>
               <h3 className="mt-4 text-balance font-display text-[clamp(1.75rem,3vw,2.5rem)] font-medium leading-[1.08] tracking-tight text-ink">
-                {project.name}
+                {t(project.name)}
               </h3>
             </Reveal>
 
             <Reveal delay={180}>
               <p className="mt-3 font-mono text-[11px] uppercase tracking-wideish text-accent-deep">
-                {project.category}
+                {t(project.category)}
               </p>
             </Reveal>
 
             <Reveal delay={220}>
               <p className="mx-auto mt-6 max-w-xl text-[14.5px] leading-relaxed text-ink/70 md:mx-0">
-                {project.description}
+                {t(project.description)}
               </p>
             </Reveal>
 
@@ -79,11 +83,11 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
               <ul className="mx-auto mt-5 max-w-xl space-y-2.5 text-left md:mx-0">
                 {project.highlights.map((h) => (
                   <li
-                    key={h}
+                    key={h.en}
                     className="flex gap-3 text-[14px] leading-relaxed text-ink/65"
                   >
                     <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-accent-deep/50" />
-                    <span>{h}</span>
+                    <span>{t(h)}</span>
                   </li>
                 ))}
               </ul>
@@ -97,7 +101,7 @@ export default function ProjectShowcase({ project, position }: ProjectShowcasePr
                   rel="noreferrer"
                   className="group mt-8 inline-flex items-center gap-2 border-b border-ink/30 pb-1 text-[14px] font-medium text-ink transition-colors duration-300 hover:border-accent hover:text-accent"
                 >
-                  View Project
+                  {t({ en: "View Project", es: "Ver Proyecto" })}
                   <span className="transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
@@ -118,6 +122,7 @@ function ProjectVisual({
   project: Project;
   Mockup: () => React.ReactElement;
 }) {
+  const t = useT();
   return (
     <div
       className={`group relative w-full overflow-hidden rounded-sm shadow-[0_20px_50px_-24px_rgba(12,18,25,0.45)] transition-transform duration-500 ease-out hover:scale-[0.97] ${
@@ -128,7 +133,7 @@ function ProjectVisual({
       {project.image ? (
         <Image
           src={project.image}
-          alt={project.imageAlt ?? project.name}
+          alt={t(project.imageAlt ?? project.name)}
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
           className="object-cover"

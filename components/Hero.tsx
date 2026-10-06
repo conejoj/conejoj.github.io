@@ -1,9 +1,14 @@
+"use client";
+
 import Reveal from "@/lib/Reveal";
 import ScrollProgress from "@/lib/ScrollProgress";
 import HeroPortrait from "@/components/HeroPortrait";
 import { expertiseLabels, site } from "@/lib/site";
+import { useLang, useT } from "@/lib/i18n";
 
 export default function Hero() {
+  const t = useT();
+  const { lang } = useLang();
   return (
     <ScrollProgress
       as="section"
@@ -25,11 +30,11 @@ export default function Hero() {
               <div className="mb-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-start">
                 <div className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-widest2 text-ink/50">
                   <span className="h-px w-8 bg-ink/30" />
-                  Jose Conejo / Software Engineer
+                  Jose Conejo / {t({ en: "Software Engineer", es: "Ingeniero de Software" })}
                 </div>
                 <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wideish text-accent-deep">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent motion-safe:animate-pulse" />
-                  Open to opportunities
+                  {t({ en: "Open to opportunities", es: "Abierto a oportunidades" })}
                 </span>
               </div>
             </Reveal>
@@ -39,23 +44,33 @@ export default function Hero() {
               as="h1"
               className="text-balance font-display text-[clamp(2.4rem,5.9vw,5.5rem)] font-medium leading-[1.02] tracking-tight text-ink"
             >
-              I build software,<br className="hidden sm:inline" /> automation,
-              and<br className="hidden sm:inline" /> AI&nbsp;systems.
+              {lang === "es" ? (
+                <>
+                  Uso la tecnología<br className="hidden sm:inline" /> para resolver
+                  problemas&nbsp;reales.
+                </>
+              ) : (
+                <>
+                  I use technology<br className="hidden sm:inline" /> to solve
+                  real&nbsp;problems.
+                </>
+              )}
             </Reveal>
 
             <Reveal delay={200}>
               <p className="mx-auto mt-9 max-w-2xl text-pretty sm:mx-0 text-[17px] leading-relaxed text-ink/65 md:text-[18px]">
-                Computer Science &amp; AI graduate with hands-on experience
-                building web applications, automation workflows, and
-                machine-learning projects.
+                {t({
+                  en: "Computer Science & AI graduate with hands-on experience building web applications, automation workflows, and machine-learning projects.",
+                  es: "Graduado en Ciencias de la Computación e IA, con experiencia práctica desarrollando aplicaciones web, flujos de automatización y proyectos de machine learning.",
+                })}
               </p>
             </Reveal>
 
             <Reveal delay={280}>
               <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-2 sm:justify-start gap-y-1 text-[14px] font-medium text-ink/80 sm:gap-x-3 sm:text-[15px]">
                 {expertiseLabels.map((label, i) => (
-                  <li key={label} className="flex items-center gap-2 sm:gap-3">
-                    {label}
+                  <li key={label.en} className="flex items-center gap-2 sm:gap-3">
+                    {t(label)}
                     {i < expertiseLabels.length - 1 && (
                       <span className="text-ink/30" aria-hidden>
                         &middot;
@@ -72,7 +87,7 @@ export default function Hero() {
                   href="#work"
                   className="group inline-flex items-center gap-2 bg-ink px-6 py-3.5 text-[14px] font-medium text-cream transition-colors duration-300 hover:bg-accent-deep"
                 >
-                  View My Work
+                  {t({ en: "View My Work", es: "Ver mis proyectos" })}
                   <span className="transition-transform duration-300 group-hover:translate-x-0.5">
                     →
                   </span>
@@ -81,7 +96,7 @@ export default function Hero() {
                   href="#contact"
                   className="group inline-flex items-center gap-2 border border-ink/20 px-6 py-3.5 text-[14px] font-medium text-ink transition-colors duration-300 hover:border-accent hover:text-accent"
                 >
-                  Get in Touch
+                  {t({ en: "Get in Touch", es: "Contáctame" })}
                 </a>
               </div>
             </Reveal>

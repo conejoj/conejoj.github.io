@@ -1,9 +1,12 @@
+"use client";
+
 import Reveal from "@/lib/Reveal";
+import { useT, type Text } from "@/lib/i18n";
 
 interface SectionHeaderProps {
-  eyebrow: string;
-  title: string;
-  subtitle?: string;
+  eyebrow: Text;
+  title: Text;
+  subtitle?: Text;
   align?: "left" | "center";
   tone?: "light" | "dark";
 }
@@ -16,6 +19,7 @@ export default function SectionHeader({
   tone = "light",
 }: SectionHeaderProps) {
   const isDark = tone === "dark";
+  const t = useT();
   return (
     <div
       className={`flex flex-col ${
@@ -34,7 +38,7 @@ export default function SectionHeader({
               isDark ? "text-paper/60" : "text-ink/50"
             }`}
           >
-            {eyebrow}
+            {t(eyebrow)}
           </span>
         </div>
       </Reveal>
@@ -44,7 +48,7 @@ export default function SectionHeader({
             isDark ? "text-paper" : "text-ink"
           }`}
         >
-          {title}
+          {t(title)}
         </h2>
       </Reveal>
       {subtitle && (
@@ -54,7 +58,7 @@ export default function SectionHeader({
               isDark ? "text-paper/65" : "text-ink/60"
             }`}
           >
-            {subtitle}
+            {t(subtitle)}
           </p>
         </Reveal>
       )}

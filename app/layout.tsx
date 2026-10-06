@@ -6,6 +6,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "./globals.css";
 import SmoothScroll from "@/lib/SmoothScroll";
+import { LanguageProvider } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://joseconejo.dev"),
@@ -39,7 +40,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased">
         <SmoothScroll />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

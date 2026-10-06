@@ -1,6 +1,10 @@
+"use client";
+
 import { site } from "@/lib/site";
+import { useT } from "@/lib/i18n";
 
 export default function Footer() {
+  const t = useT();
   const year = new Date().getFullYear();
   return (
     <footer className="bg-navy-950">
@@ -15,28 +19,28 @@ export default function Footer() {
               <span className="text-[16px] font-medium text-paper">{site.name}</span>
             </div>
             <p className="mt-4 font-mono text-[11px] uppercase tracking-wideish text-paper/40">
-              {site.tagline}
+              {t(site.tagline)}
             </p>
           </div>
 
           {/* Links */}
           <FooterLinks
             className="md:col-span-2 md:col-start-7"
-            title="Connect"
+            title={t({ en: "Connect", es: "Contacto" })}
             links={[
               { label: "LinkedIn", href: site.linkedin },
               { label: "GitHub", href: site.github },
-              { label: "Email", href: `mailto:${site.email}` },
+              { label: t({ en: "Email", es: "Correo" }), href: `mailto:${site.email}` },
             ]}
           />
           <FooterLinks
             className="md:col-span-2"
-            title="Site"
+            title={t({ en: "Site", es: "Sitio" })}
             links={[
-              { label: "Work", href: "#work" },
-              { label: "Experience", href: "#experience" },
-              { label: "About", href: "#about" },
-              { label: "Contact", href: "#contact" },
+              { label: t({ en: "Work", es: "Proyectos" }), href: "#work" },
+              { label: t({ en: "Experience", es: "Experiencia" }), href: "#experience" },
+              { label: t({ en: "About", es: "Sobre mí" }), href: "#about" },
+              { label: t({ en: "Contact", es: "Contacto" }), href: "#contact" },
             ]}
           />
 
@@ -46,7 +50,7 @@ export default function Footer() {
               href="#home"
               className="group inline-flex h-fit items-center gap-3 font-mono text-[11px] uppercase tracking-wideish text-paper/55 transition-colors duration-200 hover:text-paper"
             >
-              Back to top
+              {t({ en: "Back to top", es: "Volver arriba" })}
               <span className="flex h-9 w-9 items-center justify-center border border-paper/20 text-paper/70 transition-colors duration-200 group-hover:border-accent-bright group-hover:text-accent-bright">
                 ↑
               </span>
@@ -55,8 +59,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center gap-3 border-t border-paper/10 pt-6 text-center text-[12px] text-paper/40 md:flex-row md:justify-between md:text-left">
-          <span>&copy; {year} {site.name}. All rights reserved.</span>
-          <span>Built with Next.js.</span>
+          <span>&copy; {year} {site.name}. {t({ en: "All rights reserved.", es: "Todos los derechos reservados." })}</span>
+          <span>{t({ en: "Built with Next.js.", es: "Hecho con Next.js." })}</span>
         </div>
       </div>
     </footer>
@@ -79,7 +83,7 @@ function FooterLinks({
       </span>
       <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
-          <li key={link.label}>
+          <li key={link.href}>
             <a
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
