@@ -13,14 +13,14 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
         <Work />
         <CapabilitySection />
         <Experience />
+        <Leadership />
         <About />
         <Skills />
-        <Leadership />
         <Contact />
       </main>
       <Footer />

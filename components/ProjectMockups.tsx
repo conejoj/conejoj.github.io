@@ -86,7 +86,7 @@ export function NovaMockup() {
         ].map((s) => (
           <div key={s.l}>
             <p className="text-[11px] font-medium text-accent-bright">{s.v}</p>
-            <p className="text-[8.5px] text-paper/35">{s.l}</p>
+            <p className="text-[8.5px] text-paper/70">{s.l}</p>
           </div>
         ))}
       </div>
@@ -109,13 +109,13 @@ export function DashboardMockup() {
             key={w.label}
             className="rounded-sm border border-paper/8 bg-paper/[0.03] px-2.5 py-2"
           >
-            <p className="text-[8.5px] text-paper/40">{w.label}</p>
+            <p className="text-[8.5px] text-paper/70">{w.label}</p>
             <p className="mt-1 text-[15px] font-medium text-paper/90">{w.value}</p>
           </div>
         ))}
       </div>
       <div className="flex-1 px-4 pb-4">
-        <p className="mb-2 font-mono text-[9px] uppercase tracking-wideish text-paper/35">
+        <p className="mb-2 font-mono text-[9px] uppercase tracking-wideish text-paper/70">
           Weekly activity
         </p>
         <div className="flex h-16 items-end gap-1.5">
@@ -147,10 +147,10 @@ export function JournalMockup() {
   return (
     <MockFrame
       label="Daily Journal"
-      status={<span className="font-mono text-[9.5px] text-paper/35">Sep 7</span>}
+      status={<span className="font-mono text-[9.5px] text-paper/70">Sep 7</span>}
     >
       <div className="border-b border-paper/8 px-4 py-3.5">
-        <p className="text-[11.5px] italic leading-relaxed text-paper/60">
+        <p className="text-[11.5px] italic leading-relaxed text-paper/70">
           &ldquo;Back-to-back meetings again today. Hard to focus with the
           deadline this close...&rdquo;
         </p>
@@ -166,14 +166,14 @@ export function JournalMockup() {
         </div>
       </div>
       <div className="flex-1 px-4 py-3.5">
-        <p className="mb-2.5 font-mono text-[9px] uppercase tracking-wideish text-paper/35">
+        <p className="mb-2.5 font-mono text-[9px] uppercase tracking-wideish text-paper/70">
           Model output
         </p>
         <div className="space-y-2">
           {metrics.map((m) => (
             <div key={m.label}>
               <div className="mb-1 flex items-center justify-between">
-                <span className="text-[9.5px] text-paper/50">{m.label}</span>
+                <span className="text-[9.5px] text-paper/70">{m.label}</span>
                 <span className="font-mono text-[9px] text-accent-bright">{m.val}%</span>
               </div>
               <div className="h-1 rounded-full bg-paper/8">
@@ -199,8 +199,8 @@ export function WaltonMockup() {
   ];
   const statusStyle: Record<string, string> = {
     Approved: "text-accent-bright border-accent-bright/35 bg-accent-bright/10",
-    Pending: "text-paper/60 border-paper/20 bg-paper/[0.04]",
-    Reviewing: "text-paper/60 border-paper/20 bg-paper/[0.04]",
+    Pending: "text-paper/70 border-paper/20 bg-paper/[0.04]",
+    Reviewing: "text-paper/70 border-paper/20 bg-paper/[0.04]",
   };
   return (
     <MockFrame
@@ -224,8 +224,8 @@ export function WaltonMockup() {
               i % 2 === 1 ? "bg-paper/[0.02]" : ""
             }`}
           >
-            <span className="text-[10.5px] text-paper/80">{r.name}</span>
-            <span className="font-mono text-[10px] text-paper/50">{r.hours}</span>
+            <span className="text-[11px] text-paper/80">{r.name}</span>
+            <span className="font-mono text-[11px] text-paper/70">{r.hours}</span>
             <span
               className={`w-fit rounded-full border px-1.5 py-0.5 text-[8px] ${statusStyle[r.status]}`}
             >
@@ -264,7 +264,7 @@ export function HealthcareMockup() {
           ].map((s) => (
             <div key={s.l}>
               <p className="text-[12px] font-medium text-accent-bright">{s.v}</p>
-              <p className="text-[8px] text-paper/40">{s.l}</p>
+              <p className="text-[8px] text-paper/70">{s.l}</p>
             </div>
           ))}
         </div>

@@ -9,7 +9,9 @@ import { useT } from "@/lib/i18n";
 /**
  * Pinned storytelling on desktop: the heading stays put on the left while
  * the four capabilities scroll past on the right. Whichever one is nearest
- * the middle of the screen is highlighted, and the counter follows along.
+ * the middle of the screen is lit (full white, teal number and rule, a
+ * small nudge right) while the others dim to a still-readable grey, and a
+ * big outlined numeral in the pinned column rolls to match.
  * On small screens it falls back to a normal stacked list.
  */
 export default function CapabilitySection() {
@@ -38,14 +40,25 @@ export default function CapabilitySection() {
       });
       setActive((prev) => (prev === best ? prev : best));
     };
+    // Only measure while the section is on (or near) screen.
+    let visible = true;
     const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+      if (visible && !frame) frame = requestAnimationFrame(update);
     };
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible) onScroll();
+      },
+      { rootMargin: "20% 0px" }
+    );
+    io.observe(list);
 
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
+      io.disconnect();
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
@@ -69,7 +82,7 @@ export default function CapabilitySection() {
                 }}
                 tone="dark"
               />
-              <div className="mt-12 hidden items-center gap-4 font-mono text-[12px] text-paper/45 md:flex">
+              <div className="mt-12 hidden items-center gap-4 font-mono text-eyebrow text-paper/70 md:flex" aria-hidden>
                 <span className="w-6 text-paper/80">
                   {String(active + 1).padStart(2, "0")}
                 </span>
@@ -80,6 +93,20 @@ export default function CapabilitySection() {
                   />
                 </span>
                 <span>{String(total).padStart(2, "0")}</span>
+              </div>
+              {/* Big outlined numeral: the stack of 01–04 rolls up so only
+                  the active one shows through a one-line window. */}
+              <div
+                className="mt-8 hidden h-[1em] overflow-hidden font-display text-[clamp(6rem,11vw,10rem)] font-medium leading-none tracking-tight md:block"
+                aria-hidden
+              >
+                <div className="cap-roll" style={{ transform: `translateY(${-active}em)` }}>
+                  {capabilities.map((cap) => (
+                    <div key={cap.index} className="cap-outline h-[1em]">
+                      {cap.index}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -92,22 +119,40 @@ export default function CapabilitySection() {
                 <Reveal key={cap.index} delay={i * 70}>
                   <div
                     data-cap-row
-                    className={`grid grid-cols-1 gap-4 border-b border-paper/12 py-9 text-center transition-opacity duration-500 md:grid-cols-7 md:text-left md:gap-6 md:py-16 ${
-                      isActive ? "md:opacity-100" : "md:opacity-35"
-                    }`}
+                    className="relative grid grid-cols-1 gap-4 border-b border-paper/12 py-9 text-center md:grid-cols-7 md:gap-6 md:py-16 md:text-left"
                   >
+                    <span
+                      className={`absolute -top-px left-0 hidden h-px w-full origin-left bg-accent-bright transition-transform duration-500 ease-studio md:block ${
+                        isActive ? "scale-x-100" : "scale-x-0"
+                      }`}
+                      aria-hidden
+                    />
                     <div
-                      className={`font-mono text-[13px] transition-colors duration-500 md:col-span-1 md:pt-2 ${
-                        isActive ? "text-accent-bright" : "text-paper/35"
+                      aria-hidden
+                      className={`font-mono text-[0.8125rem] transition-colors duration-500 md:col-span-1 md:pt-2 ${
+                        isActive ? "text-accent-bright" : "text-paper/70"
                       }`}
                     >
                       {cap.index}
                     </div>
-                    <div className="md:col-span-6">
-                      <h3 className="text-[clamp(1.4rem,2.4vw,1.85rem)] font-medium tracking-tightest text-paper">
+                    <div
+                      className={`md:col-span-6 md:transition-transform md:duration-700 md:ease-studio motion-reduce:transition-none ${
+                        isActive ? "md:translate-x-2" : ""
+                      }`}
+                    >
+                      <h3
+                        className={`font-display text-[clamp(1.5rem,2.4vw,2rem)] font-medium leading-[1.15] tracking-tight text-paper transition-colors duration-500 ${
+                          isActive ? "" : "md:text-paper/50"
+                        }`}
+                      >
                         {t(cap.title)}
                       </h3>
-                      <p className="mx-auto mt-4 max-w-md text-[14.5px] leading-relaxed text-paper/60 md:mx-0">
+                      {/* Dimmed text stays at ≥4.5:1 on navy */}
+                      <p
+                        className={`mx-auto mt-4 max-w-md text-body leading-[1.7] transition-colors duration-500 md:mx-0 ${
+                          isActive ? "text-paper/75" : "text-paper/75 md:text-paper/55"
+                        }`}
+                      >
                         {t(cap.description)}
                       </p>
                     </div>

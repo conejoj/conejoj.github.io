@@ -54,8 +54,8 @@ export const leadershipEntries: LeadershipEntry[] = [
         es: "Trabajé de cerca con el director residente en la operación de la residencia y las necesidades de la comunidad.",
       },
       {
-        en: "Mentored and supported a team of 6–7 Resident Assistants, handling situations that required leadership and sound judgment.",
-        es: "Guié y apoyé a un equipo de 6–7 asistentes residentes, atendiendo situaciones que requerían liderazgo y buen criterio.",
+        en: "Mentored and supported a team of 6\u2060–\u20607 Resident Assistants, handling situations that required leadership and sound judgment.",
+        es: "Guié y apoyé a un equipo de 6\u2060–\u20607 asistentes residentes, atendiendo situaciones que requerían liderazgo y buen criterio.",
       },
     ],
     icon: "home",
@@ -65,6 +65,7 @@ export const leadershipEntries: LeadershipEntry[] = [
       en: "CIF President (Multicultural Organization)",
       es: "Presidente de CIF (una Organización Multicultural)",
     },
+    meta: { en: "John Brown University · 2022–2026", es: "John Brown University · 2022–2026" },
     description: {
       en: "Served as president of a multicultural student team focused on building community and helping students from different cultural backgrounds connect.",
       es: "Fui presidente de un equipo estudiantil multicultural enfocado en construir comunidad y ayudar a estudiantes de distintos orígenes culturales a conectar.",
@@ -83,6 +84,7 @@ export const leadershipEntries: LeadershipEntry[] = [
   },
   {
     title: { en: "Mentorship", es: "Mentoría" },
+    meta: { en: "John Brown University · 2024–2026", es: "John Brown University · 2024–2026" },
     description: {
       en: "Served as a mentor to students as they adjusted to university life and developed academically and personally.",
       es: "Fui mentor de estudiantes durante su adaptación a la vida universitaria y su desarrollo académico y personal.",
@@ -101,6 +103,7 @@ export const leadershipEntries: LeadershipEntry[] = [
   },
   {
     title: { en: "Aspire Leaders Program", es: "Aspire Leaders Program" },
+    meta: { en: "Aspire Institute · 2025", es: "Aspire Institute · 2025" },
     category: {
       en: "Global Leadership & AI Innovation",
       es: "Liderazgo Global e Innovación con IA",

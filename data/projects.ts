@@ -34,8 +34,8 @@ export const projects: Project[] = [
       es: "Desarrollo Full-Stack · Autenticación · Azure",
     },
     description: {
-      en: "A role-based service-hour management platform developed for students and administrators at John Brown University as part of a team.",
-      es: "Plataforma de gestión de horas de servicio basada en roles, desarrollada en equipo para estudiantes y administradores de John Brown University.",
+      en: "Students needed one place to submit service hours, and administrators needed one place to review and approve them. Built as part of a team at John Brown University, this role-based platform handles both.",
+      es: "Los estudiantes necesitaban un solo lugar para registrar sus horas de servicio, y los administradores, uno para revisarlas y aprobarlas. Desarrollada en equipo en John Brown University, esta plataforma basada en roles resuelve ambas cosas.",
     },
     highlights: [
       {
@@ -51,7 +51,7 @@ export const projects: Project[] = [
         es: "Creé vistas del historial de cada estudiante para dar seguimiento a más de 300 horas de servicio registradas.",
       },
     ],
-    year: "2022",
+    year: "2026",
     accent: "cream",
   },
   {
@@ -69,8 +69,8 @@ export const projects: Project[] = [
       es: "n8n · CRM · APIs · Automatización de Flujos",
     },
     description: {
-      en: "Automation work focused on improving internal workflows and connecting business systems.",
-      es: "Trabajo de automatización enfocado en mejorar procesos internos y conectar sistemas de negocio.",
+      en: "Business data had to move between CRMs, APIs, and cloud tools to keep internal processes running. These n8n workflows connect those systems so the data moves on its own.",
+      es: "Los datos del negocio debían pasar entre CRMs, APIs y herramientas en la nube para mantener los procesos internos en marcha. Estos flujos de n8n conectan esos sistemas para que los datos se muevan solos.",
     },
     highlights: [
       {
@@ -107,8 +107,8 @@ export const projects: Project[] = [
       es: "Desarrollo Web · Rendimiento · Reconstrucción del Sitio",
     },
     description: {
-      en: "A website rebuild focused on creating a cleaner user experience and improving overall site performance.",
-      es: "Reconstrucción de un sitio web enfocada en una experiencia más clara para el usuario y un mejor rendimiento general.",
+      en: "The clinic’s website needed a clearer structure and faster pages. The rebuild reorganized its content and improved load times and responsiveness.",
+      es: "El sitio web de la clínica necesitaba una estructura más clara y páginas más rápidas. La reconstrucción reorganizó su contenido y mejoró los tiempos de carga y la adaptación a distintos dispositivos.",
     },
     highlights: [
       {
@@ -145,8 +145,8 @@ export const projects: Project[] = [
       es: "PHP · MySQL · Desarrollo de Producto",
     },
     description: {
-      en: "A customizable internal dashboard designed to centralize company information and tools.",
-      es: "Dashboard interno personalizable, diseñado para centralizar la información y las herramientas de la empresa.",
+      en: "Company information and tools lived in different places. This customizable internal dashboard brings them into one view that each employee can arrange for their own work.",
+      es: "La información y las herramientas de la empresa estaban en lugares distintos. Este dashboard interno personalizable las reúne en una sola vista que cada empleado puede organizar según su trabajo.",
     },
     highlights: [
       {
@@ -173,7 +173,7 @@ export const projects: Project[] = [
       es: "Diario de Salud Mental con IA",
     },
     image: "/images/ai-mental-health-journal.webp",
-    imageAspect: "1600/906",
+    imageAspect: "1600/790",
     imageAlt: {
       en: "AI Mental Health Journal stress-trend dashboard",
       es: "Panel de tendencias de estrés del Diario de Salud Mental con IA",
@@ -183,8 +183,8 @@ export const projects: Project[] = [
       es: "Django · Machine Learning · Python",
     },
     description: {
-      en: "A Django application combining private journaling with machine-learning-based stress analysis.",
-      es: "Aplicación en Django que combina un diario privado con análisis de estrés basado en machine learning.",
+      en: "Built to help people notice stress patterns in their own writing: a Django app that pairs a private journal with machine-learning stress analysis.",
+      es: "Creada para ayudar a las personas a notar patrones de estrés en lo que escriben: una aplicación en Django que combina un diario privado con análisis de estrés basado en machine learning.",
     },
     highlights: [
       {

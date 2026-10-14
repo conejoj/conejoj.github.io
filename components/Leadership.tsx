@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import Reveal from "@/lib/Reveal";
 import SectionHeader from "@/components/SectionHeader";
 import { leadershipEntries } from "@/data/leadership";
@@ -81,7 +81,7 @@ export default function Leadership() {
           }}
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-4 md:gap-7">
+        <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-4 sm:gap-6 md:mt-16 md:gap-7">
           {leadershipEntries.map((entry, i) => (
             <Reveal
               key={entry.title.en}
@@ -90,52 +90,113 @@ export default function Leadership() {
               }`}
               delay={i * 110}
             >
-              <div className="group relative flex h-full flex-col border border-ink/12 bg-cream p-6 shadow-[0_1px_2px_rgba(23,23,23,0.04)] transition-all duration-500 ease-out hover:-translate-y-[5px] hover:border-accent/40 hover:shadow-[0_28px_48px_-28px_rgba(23,23,23,0.3)] lg:p-8">
-                <div className="flex items-start justify-between">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-accent/25 bg-accent/[0.08] text-accent-deep transition-all duration-500 ease-out group-hover:-rotate-3 group-hover:scale-110 group-hover:bg-accent/[0.16]">
-                    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
-                      {ICONS[entry.icon]}
-                    </svg>
-                  </span>
-                  <span className="font-mono text-[11px] text-ink/25">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-
-                <div className="mt-6 min-w-0 flex-1 text-center md:text-left">
-                  {entry.meta && (
-                    <p className="font-mono text-[11px] uppercase tracking-wideish text-ink/40">
-                      {t(entry.meta)}
-                    </p>
-                  )}
-                  <h3 className="mt-1 font-display text-[1.3rem] font-medium leading-tight tracking-tight text-ink transition-colors duration-300 group-hover:text-accent-deep">
-                    {t(entry.title)}
-                  </h3>
-                  {entry.category && (
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-wideish text-accent-deep">
-                      {t(entry.category)}
-                    </p>
-                  )}
-                  <p className="mt-3 text-[14px] leading-relaxed text-ink/65">
-                    {t(entry.description)}
-                  </p>
-                  <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4 text-left">
-                    {entry.highlights.map((h) => (
-                      <li
-                        key={h.en}
-                        className="flex gap-3 text-[13.5px] leading-relaxed text-ink/60"
-                      >
-                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent-deep/60" />
-                        <span>{t(h)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <LeadershipCard entry={entry} />
             </Reveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * One leadership entry. On phones it's a compact row (icon, dates, title)
+ * that opens to show the details, like Experience; from 640px up the full
+ * card is always shown. Content renders open until hydration, so it's
+ * readable without JavaScript.
+ */
+function LeadershipCard({ entry }: { entry: LeadershipEntry }) {
+  const t = useT();
+  const id = useId();
+  const [open, setOpen] = useState<boolean | null>(null);
+  useEffect(() => setOpen(false), []);
+
+  const icon = (size: string) => (
+    <span
+      className={`flex ${size} shrink-0 items-center justify-center border border-accent/25 bg-accent/[0.08] text-accent-deep`}
+    >
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
+        {ICONS[entry.icon]}
+      </svg>
+    </span>
+  );
+
+  return (
+    <div className="relative flex h-full flex-col border border-ink/12 bg-cream p-5 shadow-[0_1px_2px_rgba(23,23,23,0.04)] sm:p-6 lg:p-8">
+      {/* Phone header: the whole row toggles the details */}
+      <h3 className="sm:hidden">
+        <button
+          type="button"
+          aria-expanded={open !== false}
+          aria-controls={id}
+          onClick={() => setOpen((v) => !(v ?? true))}
+          className="group flex w-full items-center gap-4 text-left"
+        >
+          {icon("h-10 w-10")}
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-[1.2rem] font-medium leading-tight tracking-tight text-ink">
+              {t(entry.title)}
+            </span>
+            {entry.meta && (
+              <span className="mt-1.5 block font-mono text-label uppercase tracking-wideish text-ink/65">
+                {/* "Org · years" as two lines, so the dot never hangs */}
+                {t(entry.meta)
+                  .split(" · ")
+                  .map((part, i) => (
+                    <span key={part} className="block">
+                      {i > 0 && <span className="sr-only">, </span>}
+                      {part}
+                    </span>
+                  ))}
+              </span>
+            )}
+          </span>
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-ink/20 text-ink/70" aria-hidden>
+            <span
+              className={`text-[1rem] leading-none transition-transform duration-300 ${
+                open !== false ? "rotate-45" : ""
+              }`}
+            >
+              +
+            </span>
+          </span>
+        </button>
+      </h3>
+
+      {/* Card header from 640px up */}
+      <div className="hidden sm:block">
+        <div className="flex">{icon("h-12 w-12")}</div>
+        <div className="mt-6">
+          {entry.meta && (
+            <p className="font-mono text-label uppercase tracking-wideish text-ink/65">
+              {t(entry.meta)}
+            </p>
+          )}
+          <h3 className="mt-1 font-display text-[1.3rem] font-medium leading-tight tracking-tight text-ink">
+            {t(entry.title)}
+          </h3>
+        </div>
+      </div>
+
+      <div
+        id={id}
+        className={`min-w-0 flex-1 ${open === false ? "hidden sm:block" : "mt-4 sm:mt-0"}`}
+      >
+        {entry.category && (
+          <p className="mt-1 font-mono text-label uppercase tracking-wideish text-accent-deep">
+            {t(entry.category)}
+          </p>
+        )}
+        <p className="mt-3 text-body-sm text-ink/65">{t(entry.description)}</p>
+        <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4">
+          {entry.highlights.map((h) => (
+            <li key={h.en} className="flex gap-3 text-body-sm text-ink/65">
+              <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent-deep/60" />
+              <span className="min-w-0">{t(h)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

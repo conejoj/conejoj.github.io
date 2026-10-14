@@ -1,83 +1,178 @@
 "use client";
 
+import { useState, type ReactNode } from "react";
 import Reveal from "@/lib/Reveal";
-import { site } from "@/lib/site";
+import { availability, resumeFileName, resumeLabel, site } from "@/lib/site";
 import { useT } from "@/lib/i18n";
 
+/**
+ * Copies the email address, for visitors whose "Email Me" click does
+ * nothing (no mail app set up). Confirms in place for 2s; the width is
+ * fixed so the row doesn't shift when the label changes.
+ */
+function CopyEmailButton() {
+  const t = useT();
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(site.email);
+    } catch {
+      // Older browsers: select-and-copy through a temporary field
+      const field = document.createElement("textarea");
+      field.value = site.email;
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand("copy");
+      field.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="inline-flex min-h-11 min-w-[4.75rem] shrink-0 items-center justify-center border border-paper/30 px-3 font-mono text-label uppercase tracking-wideish text-paper/80 transition-colors duration-200 hover:border-paper hover:text-paper"
+    >
+      <span aria-live="polite">
+        {copied ? t({ en: "Copied!", es: "¡Copiado!" }) : t({ en: "Copy", es: "Copiar" })}
+      </span>
+    </button>
+  );
+}
+
+/**
+ * One contact row: mono label over the value on the left, an action
+ * (copy, ↗ or ↓) on the right. Rows share the column's height evenly.
+ */
+function Row({ label, value, action }: { label: string; value: ReactNode; action: ReactNode }) {
+  return (
+    <li className="flex flex-1 items-center justify-between gap-4 border-b border-paper/15 py-4">
+      <div className="min-w-0">
+        <span className="block font-mono text-label uppercase tracking-wideish text-paper/70">{label}</span>
+        <div className="mt-1 min-w-0">{value}</div>
+      </div>
+      {action}
+    </li>
+  );
+}
+
+const valueLink =
+  "inline-flex min-h-11 max-w-full items-center text-body text-paper transition-colors duration-200 hover:text-accent-bright";
+const iconLink =
+  "flex h-11 w-11 shrink-0 items-center justify-center border border-paper/25 text-paper/80 transition-colors duration-200 hover:border-paper hover:text-paper";
+
+/**
+ * Contact. Left: the heading, the pitch and the main action. Right: every
+ * way to reach Jose as a stacked list that runs the height of the left side.
+ */
 export default function Contact() {
   const t = useT();
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden border-b border-paper/10 bg-accent-deep py-28 md:py-36"
-    >
-      <div
-        className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] -translate-y-1/3 translate-x-1/4 rounded-full border border-paper/15"
-        aria-hidden
-      />
-
-      <div className="relative mx-auto max-w-content px-6 md:px-10">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:items-end md:gap-6">
-          <div className="text-center md:col-span-8 md:text-left">
-            <Reveal>
-              <div className="mb-6 flex items-center justify-center gap-3 font-mono md:justify-start text-[12px] uppercase tracking-widest2 text-paper/55">
-                <span className="h-px w-8 bg-paper/35" />
-                {t({ en: "Contact", es: "Contacto" })}
-              </div>
-            </Reveal>
-            <Reveal delay={80}>
-              <h2 className="text-balance font-display text-[clamp(2.25rem,5.5vw,4.25rem)] font-medium leading-[1.05] tracking-tight text-paper">
-                {t({ en: "Let\u2019s make something work better.", es: "Hagamos que algo funcione mejor." })}
-              </h2>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mx-auto mt-6 max-w-md text-balance md:mx-0 text-[15px] leading-relaxed text-paper/65">
-                {t({
-                  en: "For work opportunities, collaborations, or questions about my projects, feel free to reach out.",
-                  es: "Para oportunidades laborales, colaboraciones o preguntas sobre mis proyectos, no dudes en escribirme.",
-                })}
-              </p>
-            </Reveal>
-            <Reveal delay={220}>
-              <a
-                href={`mailto:${site.email}`}
-                className="group mt-9 inline-flex items-center gap-2 bg-paper px-7 py-4 text-[14px] font-medium text-ink transition-colors duration-300 hover:bg-cream"
-              >
-                {t({ en: "Email Me", es: "Escríbeme" })}
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                  →
-                </span>
-              </a>
-            </Reveal>
-          </div>
-
-          <div className="md:col-span-4">
-            <Reveal delay={260}>
-              <div className="flex flex-col gap-5 border-t border-paper/20 pt-6 text-center md:border-l md:border-t-0 md:pl-8 md:pt-0 md:text-left">
-                {[
-                  { label: t({ en: "Email", es: "Correo" }), value: site.email, href: `mailto:${site.email}` },
-                  { label: "LinkedIn", value: "linkedin.com/in/conejoj", href: site.linkedin },
-                  { label: "GitHub", value: "github.com/joseconejochevez-prog", href: site.github },
-                ].map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target={item.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                    className="group block"
-                  >
-                    <span className="block font-mono text-[10px] uppercase tracking-wideish text-paper/45">
-                      {item.label}
-                    </span>
-                    <span className="mt-1 block text-[14px] text-paper/85 transition-colors duration-200 group-hover:text-paper">
-                      {item.value}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </Reveal>
-          </div>
+    <section id="contact" className="border-b border-paper/10 bg-accent-deep py-24 md:py-28">
+      <div className="mx-auto grid max-w-content grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-12 lg:items-stretch lg:gap-12">
+        {/* Heading, pitch, main action */}
+        {/* Phones: heading block centered, paragraph left (site-wide rule) */}
+        <div className="text-center md:text-left lg:col-span-7">
+          <Reveal>
+            <div className="mb-6 flex items-center justify-center gap-3 font-mono text-eyebrow uppercase tracking-widest2 text-paper/70 md:justify-start">
+              <span className="eyebrow-rule h-px w-5 shrink-0 bg-paper/35 md:w-8" aria-hidden />
+              {t({ en: "Contact", es: "Contacto" })}
+              <span className="eyebrow-rule h-px w-5 shrink-0 bg-paper/35 md:hidden" aria-hidden />
+            </div>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="text-balance font-display text-[clamp(2.25rem,5vw,4.25rem)] font-medium leading-[1.04] tracking-tight text-paper">
+              {t({ en: "Let\u2019s make something work better.", es: "Hagamos que algo funcione mejor." })}
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mx-auto mt-6 max-w-xl text-left text-body leading-[1.7] text-paper/75 md:mx-0">
+              {t({
+                en: "For work opportunities, collaborations, or questions about my projects, feel free to reach out.",
+                es: "Para oportunidades laborales, colaboraciones o preguntas sobre mis proyectos, no dudes en escribirme.",
+              })}
+            </p>
+            <p className="mt-4 font-mono text-label uppercase leading-relaxed tracking-wideish text-paper/80">
+              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent-bright align-middle" aria-hidden />
+              {t(availability)}
+            </p>
+          </Reveal>
+          <Reveal delay={220}>
+            <a
+              href={`mailto:${site.email}`}
+              className="group mt-9 inline-flex items-center gap-2 bg-paper px-7 py-4 text-ui font-medium text-ink transition-colors duration-300 hover:bg-cream"
+            >
+              {t({ en: "Email Me", es: "Escríbeme" })}
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden>
+                →
+              </span>
+            </a>
+          </Reveal>
         </div>
+
+        {/* Every way to reach Jose */}
+        <Reveal delay={260} className="flex lg:col-span-5">
+          <ul className="flex w-full flex-col border-t border-paper/15">
+            <Row
+              label={t({ en: "Email", es: "Correo" })}
+              value={
+                <a href={`mailto:${site.email}`} className={valueLink}>
+                  <span className="min-w-0 break-words">
+                    {/* Preferred break point before "@" on narrow screens */}
+                    {site.email.split("@")[0]}
+                    <wbr />@{site.email.split("@")[1]}
+                  </span>
+                </a>
+              }
+              action={<CopyEmailButton />}
+            />
+            <Row
+              label="LinkedIn"
+              value={
+                <a href={site.linkedin} target="_blank" rel="noreferrer" className={valueLink}>
+                  linkedin.com/in/conejoj
+                </a>
+              }
+              action={
+                <a href={site.linkedin} target="_blank" rel="noreferrer" className={iconLink} aria-label="LinkedIn" tabIndex={-1}>
+                  <span aria-hidden>↗</span>
+                </a>
+              }
+            />
+            <Row
+              label="GitHub"
+              value={
+                <a href={site.github} target="_blank" rel="noreferrer" className={valueLink}>
+                  <span className="min-w-0 break-words">
+                    github.com/<wbr />joseconejochevez-prog
+                  </span>
+                </a>
+              }
+              action={
+                <a href={site.github} target="_blank" rel="noreferrer" className={iconLink} aria-label="GitHub" tabIndex={-1}>
+                  <span aria-hidden>↗</span>
+                </a>
+              }
+            />
+            <Row
+              label={t({ en: "Resume", es: "CV" })}
+              value={
+                <a href={site.resumeUrl} download={resumeFileName} className={`${valueLink} gap-2`}>
+                  {t(resumeLabel)}
+                  <span className="border border-paper/25 px-1.5 py-0.5 font-mono text-label font-normal uppercase tracking-wideish text-paper/70">
+                    PDF
+                  </span>
+                </a>
+              }
+              action={
+                <a href={site.resumeUrl} download={resumeFileName} className={iconLink} aria-label={t(resumeLabel)} tabIndex={-1}>
+                  <span aria-hidden>↓</span>
+                </a>
+              }
+            />
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

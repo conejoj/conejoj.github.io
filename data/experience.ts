@@ -24,8 +24,8 @@ export const experience: ExperienceEntry[] = [
     },
     highlights: [
       {
-        en: "Built automation workflows connecting CRM systems, APIs, cloud data sources, and third-party tools to support internal business processes and data movement.",
-        es: "Construí flujos de automatización que conectan sistemas CRM, APIs, fuentes de datos en la nube y herramientas externas para apoyar procesos internos y el movimiento de datos.",
+        en: "Worked on automation workflows connecting CRM systems, APIs, cloud data sources, and third-party tools to support internal business processes and data movement.",
+        es: "Trabajé en flujos de automatización que conectan sistemas CRM, APIs, fuentes de datos en la nube y herramientas externas para apoyar procesos internos y el movimiento de datos.",
       },
       {
         en: "Used AI tools to assist with web development, automation design, debugging, documentation, and workflow improvement.",

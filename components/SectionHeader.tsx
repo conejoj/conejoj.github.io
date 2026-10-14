@@ -31,15 +31,24 @@ export default function SectionHeader({
       <Reveal>
         <div className="mb-5 flex items-center gap-3">
           <span
-            className={`h-px w-8 ${isDark ? "bg-paper/40" : "bg-ink/30"}`}
+            className={`eyebrow-rule h-px w-5 shrink-0 md:w-8 ${isDark ? "bg-paper/40" : "bg-ink/30"}`}
+            aria-hidden
           />
           <span
-            className={`font-mono text-[12px] uppercase tracking-widest2 ${
-              isDark ? "text-paper/60" : "text-ink/50"
+            className={`font-mono text-eyebrow uppercase tracking-widest2 ${
+              isDark ? "text-paper/70" : "text-ink/65"
             }`}
           >
             {t(eyebrow)}
           </span>
+          {/* Matching rule on the right while the label is centered, so the
+              word itself sits on the center line */}
+          <span
+            className={`eyebrow-rule h-px w-5 shrink-0 md:w-8 ${isDark ? "bg-paper/40" : "bg-ink/30"} ${
+              align === "center" ? "" : "md:hidden"
+            }`}
+            aria-hidden
+          />
         </div>
       </Reveal>
       <Reveal delay={80}>
@@ -54,8 +63,8 @@ export default function SectionHeader({
       {subtitle && (
         <Reveal delay={140}>
           <p
-            className={`mx-auto mt-5 max-w-xl text-balance md:mx-0 text-[15px] leading-relaxed ${
-              isDark ? "text-paper/65" : "text-ink/60"
+            className={`mx-auto mt-5 max-w-xl text-balance md:mx-0 text-body ${
+              isDark ? "text-paper/70" : "text-ink/65"
             }`}
           >
             {t(subtitle)}

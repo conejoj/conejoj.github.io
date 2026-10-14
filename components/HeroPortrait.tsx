@@ -1,28 +1,39 @@
 import Image from "next/image";
+import { preload } from "react-dom";
+import HeroCaption from "@/components/HeroCaption";
+
+const PORTRAIT = "/images/portrait-hero.webp";
 
 /**
  * The hero's visual half: the full, uncropped portrait, set inside a
  * print-style layout — offset hairline frame, corner marks, generous
- * whitespace. Motion is limited to a one-time mask reveal on load and a
- * very slow push-in on hover (both disabled for reduced-motion users).
+ * whitespace, and a figure caption with Jose's local time. Motion: a
+ * one-time mask reveal on load, a very slow push-in on hover, and (with a
+ * mouse) the photo and its mat drift apart a few pixels as the cursor
+ * moves, like a print lifted off the page. All still for reduced motion.
  */
 export default function HeroPortrait() {
+  // The portrait is hidden below 640px, so only wider screens preload it
+  // (high priority, it's the hero image there). The <img> itself is lazy,
+  // which keeps phones from downloading it at all.
+  preload(PORTRAIT, { as: "image", media: "(min-width: 640px)", fetchPriority: "high" });
   return (
+    <div>
     <div className="hero-portrait relative pb-12 pr-12">
       {/* Offset hairline frame, sitting behind the photo like a mat */}
       <div
-        className="hero-portrait-frame absolute bottom-0 left-12 right-0 top-12 border border-ink/15"
+        className="hero-portrait-frame hero-drift-frame absolute bottom-0 left-12 right-0 top-12 border border-ink/15"
         aria-hidden
       />
 
       {/* Photo: box matches the image's own aspect ratio, so nothing is cropped */}
-      <div className="hero-portrait-mask relative aspect-[1000/1140] w-full overflow-hidden bg-stone-200">
+      <div className="hero-portrait-mask hero-drift-photo relative aspect-[1000/1140] w-full overflow-hidden bg-stone-200">
         <div className="hero-portrait-settle absolute inset-0">
           <Image
-            src="/images/portrait-hero.webp"
+            src={PORTRAIT}
             alt="Jose Conejo"
             fill
-            priority
+            loading="lazy"
             sizes="(min-width: 768px) 480px, 100vw"
             className="hero-portrait-img object-cover [filter:saturate(0.72)_contrast(1.05)_sepia(0.07)]"
           />
@@ -53,6 +64,8 @@ export default function HeroPortrait() {
           strokeWidth="1.5"
         />
       </svg>
+    </div>
+    <HeroCaption />
     </div>
   );
 }

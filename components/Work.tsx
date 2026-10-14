@@ -14,7 +14,7 @@ export default function Work() {
 
   return (
     <section id="work" className="bg-cream">
-      <div className="mx-auto flex max-w-content flex-col items-center gap-6 px-6 pb-6 pt-24 md:flex-row md:items-end md:justify-between md:gap-10 md:px-10 md:pb-12 md:pt-32">
+      <div className="mx-auto flex max-w-content flex-col items-center gap-6 px-6 pb-4 pt-24 md:flex-row md:items-end md:justify-between md:gap-10 md:px-10 md:pb-6 md:pt-32">
         <SectionHeader
           eyebrow={{ en: "Work", es: "Proyectos" }}
           title={{ en: "Selected Work", es: "Proyectos Destacados" }}
@@ -24,7 +24,7 @@ export default function Work() {
           }}
         />
         <Reveal delay={200} className="hidden shrink-0 sm:block">
-          <p className="pb-1 font-mono text-[11px] uppercase tracking-widest2 text-ink/45">
+          <p className="pb-1 font-mono text-label uppercase tracking-widest2 text-ink/65">
             {count} {t({ en: "Projects", es: "Proyectos" })} / {range}
           </p>
         </Reveal>

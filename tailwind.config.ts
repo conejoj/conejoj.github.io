@@ -32,6 +32,18 @@ const config: Config = {
           deep: "#20403E",
         },
       },
+      // Type roles. Named by job, not size. Display sizes stay as clamps in
+      // the components; everything else uses one of these.
+      fontSize: {
+        lead: ["1.0625rem", { lineHeight: "1.65" }], // hero intro (18px from md)
+        "lead-lg": ["1.125rem", { lineHeight: "1.65" }],
+        body: ["1rem", { lineHeight: "1.65" }], // paragraphs, descriptions
+        "body-sm": ["0.9375rem", { lineHeight: "1.6" }], // bullets, lists, card copy
+        ui: ["0.875rem", { lineHeight: "1.5" }], // buttons, links, meta lines
+        meta: ["0.75rem", { lineHeight: "1.5" }], // footer fine print
+        eyebrow: ["0.75rem", { lineHeight: "1.5" }], // mono section labels, nav
+        label: ["0.6875rem", { lineHeight: "1.5" }], // mono tags, small labels
+      },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],

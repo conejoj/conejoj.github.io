@@ -7,6 +7,8 @@ interface RevealProps {
   className?: string;
   delay?: number;
   as?: keyof JSX.IntrinsicElements;
+  /** Animate on page load with CSS only (for above-the-fold content). */
+  immediate?: boolean;
 }
 
 /**
@@ -18,12 +20,15 @@ export default function Reveal({
   className = "",
   delay = 0,
   as = "div",
+  immediate = false,
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    // Tell the <head> safety timer that the page's code is running.
+    (window as any).__revealReady = true;
     const node = ref.current;
-    if (!node) return;
+    if (!node || immediate) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,14 +44,14 @@ export default function Reveal({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [immediate]);
 
   const Tag = as as any;
 
   return (
     <Tag
       ref={ref}
-      className={`reveal ${className}`}
+      className={`${immediate ? "reveal-load" : "reveal"} ${className}`}
       style={{ animationDelay: delay ? `${delay}ms` : undefined }}
     >
       {children}

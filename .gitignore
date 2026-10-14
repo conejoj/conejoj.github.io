@@ -4,3 +4,6 @@ out
 .DS_Store
 *.log
 .env*.local
+
+# Impeccable (machine-local hook settings)
+.claude/settings.local.json
