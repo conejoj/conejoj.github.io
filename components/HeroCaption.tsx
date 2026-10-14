@@ -32,20 +32,24 @@ export default function HeroCaption() {
   }
 
   return (
-    <p className="mt-4 flex items-baseline justify-between gap-4 pr-12 font-mono text-label uppercase tracking-wideish text-ink/60">
-      <span>Fig. 01</span>
-      <span className="text-right">
+    <p className="hero-caption mt-4 flex items-baseline justify-between gap-4 pr-12 font-mono text-label uppercase tracking-wideish text-ink/60">
+      {/* "Fig. 01" only where the column is wide enough to keep one line */}
+      <span className="whitespace-nowrap">
+        <span className="hidden lg:inline">
+          Fig. 01<span aria-hidden> — </span>
+          <span className="sr-only">, </span>
+        </span>
         Costa Rica
+      </span>
+      {/* Time sits on its own, so filling it in doesn't shift anything */}
+      <span className="whitespace-nowrap text-right text-ink/80">
         {time && (
           <>
-            <span aria-hidden> — </span>
-            <span className="sr-only">, {lang === "es" ? "hora local" : "local time"} </span>
-            <span className="text-ink/80">
-              {time.hm[0]}
-              <span className="hero-clock-colon">:</span>
-              {time.hm[1]}
-              {time.suffix}
-            </span>
+            <span className="sr-only">{lang === "es" ? "Hora local: " : "Local time: "}</span>
+            {time.hm[0]}
+            <span className="hero-clock-colon">:</span>
+            {time.hm[1]}
+            {time.suffix}
           </>
         )}
       </span>

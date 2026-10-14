@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { preload } from "react-dom";
 import HeroCaption from "@/components/HeroCaption";
@@ -11,14 +14,24 @@ const PORTRAIT = "/images/portrait-hero.webp";
  * one-time mask reveal on load, a very slow push-in on hover, and (with a
  * mouse) the photo and its mat drift apart a few pixels as the cursor
  * moves, like a print lifted off the page. All still for reduced motion.
+ *
+ * The reveal waits until the photo has actually loaded, so it never wipes
+ * open an empty box and then has the picture pop in. The frame, corner
+ * marks and caption follow it in, in that order.
  */
 export default function HeroPortrait() {
   // The portrait is hidden below 640px, so only wider screens preload it
   // (high priority, it's the hero image there). The <img> itself is lazy,
   // which keeps phones from downloading it at all.
   preload(PORTRAIT, { as: "image", media: "(min-width: 640px)", fetchPriority: "high" });
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  // Covers a photo that finished loading before React hydrated.
+  useEffect(() => {
+    if (ref.current?.querySelector("img")?.complete) setLoaded(true);
+  }, []);
   return (
-    <div>
+    <div ref={ref} className={`hero-portrait-wrap ${loaded ? "is-loaded" : ""}`}>
     <div className="hero-portrait relative pb-12 pr-12">
       {/* Offset hairline frame, sitting behind the photo like a mat */}
       <div
@@ -35,6 +48,7 @@ export default function HeroPortrait() {
             fill
             loading="lazy"
             sizes="(min-width: 768px) 480px, 100vw"
+            onLoad={() => setLoaded(true)}
             className="hero-portrait-img object-cover [filter:saturate(0.72)_contrast(1.05)_sepia(0.07)]"
           />
         </div>
@@ -42,7 +56,7 @@ export default function HeroPortrait() {
 
       {/* Corner marks, same motif used on project visuals */}
       <svg
-        className="absolute -left-4 -top-4 opacity-30"
+        className="hero-portrait-corner absolute -left-4 -top-4 opacity-30"
         width="32"
         height="32"
         viewBox="0 0 32 32"
@@ -51,7 +65,7 @@ export default function HeroPortrait() {
         <path d="M0 0H32M0 0V32" stroke="currentColor" className="text-ink" strokeWidth="1.5" />
       </svg>
       <svg
-        className="absolute -bottom-4 -right-4 opacity-40"
+        className="hero-portrait-corner absolute -bottom-4 -right-4 opacity-40"
         width="32"
         height="32"
         viewBox="0 0 32 32"
