@@ -27,7 +27,7 @@ A software engineer who uses technology to solve real business problems, working
 
 - Bilingual site: every visible string exists in English and Spanish, with an EN | ES toggle in the navbar. The choice persists in localStorage and sets `<html lang>`.
 - Visitors arrive from LinkedIn, GitHub, résumé links, and direct sharing; many on mobile.
-- Primary actions: "Get in Touch" (email), LinkedIn, GitHub, and Download Résumé (`/jose-conejo-resume.pdf`).
+- Primary actions: "Get in Touch" (email), LinkedIn, GitHub, and Download Résumé (`/Jose_Conejo_CV.pdf`).
 
 ## Capabilities and Constraints
 
@@ -51,7 +51,7 @@ A software engineer who uses technology to solve real business problems, working
 ## Evidence on Hand
 
 - Projects with real screenshots: Walton Service Hours Platform, Automation Systems (n8n workflow), Panama Cancer Clinic website, Prime Software Solutions dashboard (capstone), AI Mental Health Journal (`public/images/*.webp`).
-- Experience: NOVA Solutions (automation, AI & web development, 2025–Mar 2026), Prime Software Solutions capstone (2025–2026), Freelance (2022–present).
+- Experience: Novavision Group (automation, AI & web development, 2025–Mar 2026), Prime Software Solutions capstone (2025–2026), Freelance (2022–present).
 - Leadership: SGA President, John Brown University (2025–2026); CIF President; Residence Life, RA to Assistant Resident Director (2023–2026, coed upperclassmen hall of 200+ students, team of 6–7 RAs); Mentorship; Aspire Leaders Program.
 - Photos: hero portrait; About portrait from the JBU Board of Trustees meeting, Fall 2025.
 - Résumé PDF in `public/`.

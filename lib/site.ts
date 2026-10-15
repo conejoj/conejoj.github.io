@@ -11,7 +11,7 @@ export const site = {
   email: "joseconejochevez@gmail.com",
   linkedin: "https://www.linkedin.com/in/conejoj/",
   github: "https://github.com/joseconejochevez-prog",
-  resumeUrl: "/jose-conejo-resume.pdf",
+  resumeUrl: "/Jose_Conejo_CV.pdf",
   location: "Costa Rica",
   url: "https://joseconejo.me",
 };
@@ -25,7 +25,7 @@ export const availability: L = {
 // One résumé label everywhere. Every résumé link downloads the PDF (download
 // attribute) under this file name instead of opening a new tab.
 export const resumeLabel: L = { en: "Download Resume", es: "Descargar CV" };
-export const resumeFileName = "Jose-Conejo-Resume.pdf";
+export const resumeFileName = "Jose_Conejo_CV.pdf";
 
 export const navLinks: { label: L; href: string }[] = [
   { label: { en: "Work", es: "Proyectos" }, href: "#work" },

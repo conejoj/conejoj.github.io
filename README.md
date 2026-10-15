@@ -34,7 +34,7 @@ Everything content-related lives in `data/` and `lib/site.ts` — you should rar
 
 ## Replacing placeholders
 
-- **Resume**: replace `public/jose-conejo-resume.pdf` with your real resume (same filename, or update `resumeUrl` in `lib/site.ts`).
+- **Resume**: replace `public/Jose_Conejo_CV.pdf` with your real resume (same filename, or update `resumeUrl` in `lib/site.ts`).
 - **Portrait**: the About section currently renders a styled placeholder panel (`components/About.tsx`). To use a real photo, add an `next/image` `<Image>` inside that panel pointing at a file in `public/`.
 - **Project visuals**: `components/ProjectShowcase.tsx` renders an abstract, data-driven cover (index, initials, category) for each project rather than a screenshot, so nothing looks like a generic stock image out of the box. Swap in real screenshots/mockups by replacing the `ProjectVisual` function with an `<Image>` per project (add an `image` field to `data/projects.ts`).
 - **Favicon**: `app/icon.tsx` generates the "JC" monogram favicon programmatically — edit the JSX there to change colors/text.

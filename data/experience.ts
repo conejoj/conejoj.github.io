@@ -12,7 +12,7 @@ export interface ExperienceEntry {
 
 export const experience: ExperienceEntry[] = [
   {
-    company: "NOVA Solutions",
+    company: "Novavision Group",
     role: {
       en: "Automation, AI & Web Development",
       es: "Automatización, IA y Desarrollo Web",
