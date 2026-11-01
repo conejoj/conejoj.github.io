@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/lib/SmoothScroll";
 import { LanguageProvider } from "@/lib/i18n";
+import { site } from "@/lib/site";
 
 // Self-hosted fonts (files from the @fontsource packages) loaded through
 // next/font: the two above-the-fold faces are preloaded, and Next generates
@@ -80,6 +81,38 @@ export const metadata: Metadata = {
   },
 };
 
+// Structured data: tells search engines this site belongs to the person
+// "Jose Conejo" and links it to his LinkedIn and GitHub, which helps Google
+// match the site to searches for his name.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: site.name,
+      alternateName: ["José Conejo", "joseconejo.me"],
+      inLanguage: ["en", "es"],
+      publisher: { "@id": `${site.url}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      alternateName: "José Conejo",
+      url: `${site.url}/`,
+      image: `${site.url}/images/portrait-hero.webp`,
+      jobTitle: "Software Engineer",
+      email: `mailto:${site.email}`,
+      address: { "@type": "PostalAddress", addressCountry: "CR" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "John Brown University" },
+      knowsAbout: ["Software Engineering", "Artificial Intelligence", "Automation", "Web Development", "Machine Learning"],
+      sameAs: [site.linkedin, site.github],
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -104,6 +137,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll />
         <LanguageProvider>{children}</LanguageProvider>
       </body>
