@@ -67,8 +67,8 @@ export const leadershipEntries: LeadershipEntry[] = [
     },
     meta: { en: "John Brown University · 2022–2026", es: "John Brown University · 2022–2026" },
     description: {
-      en: "Joined CIF in my freshman year. It became an official student organization in my sophomore year, and I served as president in my junior and senior years.",
-      es: "Me uní a CIF en mi primer año. En mi segundo año se convirtió en una organización estudiantil oficial, y fui presidente en mi tercer y cuarto año.",
+      en: "Served as a member of CIF for two years before becoming president for my junior and senior years.",
+      es: "Formé parte de CIF durante dos años antes de asumir la presidencia en mi tercer y cuarto año universitario.",
     },
     highlights: [
       {
